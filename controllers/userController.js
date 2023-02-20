@@ -1,0 +1,93 @@
+const User = require("../models/user")
+
+const { body, validationResult } = require("express-validator");
+const bcrypt = require("bcryptjs")
+
+const passport = require("passport");
+
+
+exports.index = function (req, res, next) {
+    res.render('index', {user: req.user});
+}
+exports.user_create_get = function (req, res, next) {
+    res.render("sign-up")
+}
+exports.user_create_post = [
+    // Validate and sanitize fields.
+    body("firstname")
+      .trim()
+      .isLength({ min: 1 })
+      .escape()
+      .withMessage("First name must be specified.")
+      .isAlphanumeric()
+      .withMessage("First name has non-alphanumeric characters."),
+    body("lastname")
+      .trim()
+      .isLength({ min: 1 })
+      .escape()
+      .withMessage("Last name must be specified.")
+      .isAlphanumeric()
+      .withMessage("Last name has non-alphanumeric characters."),
+    body("username")
+        .trim()
+        .isLength({ min: 1 })
+        .escape()
+        .withMessage("Username must be specified."),
+    body("password")
+        .isLength({ min: 1 }),
+    body("confirmPassword")
+        .isLength({min: 1})
+        .custom((value, {req}) => value === req.body.password),
+  
+    // Process request after validation and sanitization.
+    async (req, res, next) => {
+      // Extract the validation errors from a request.
+      const errors = validationResult(req);
+  
+      if (!errors.isEmpty()) {
+        // There are errors. Render form again with sanitized values/errors messages.
+        res.render("sign-up", {
+          user: user,
+          errors: errors.array(),
+        });
+        return;
+      } 
+      // Data from form is valid.
+
+      try {
+        const isUsernameTaken = await User.find({username: req.body.username})
+        if (isUsernameTaken.length > 0) {
+          res.render("sign-up", {error: "username already exists"})
+          return
+        }
+        bcrypt.hash(req.body.password, 10, (err, hashedPassword) => {
+          if(err) return next(err)
+          const user = new User({
+            first_name: req.body.firstname,
+            last_name: req.body.lastname,
+            username: req.body.username,
+            password: hashedPassword,
+            membership_status: false,
+          }).save(err => err ? next(err) : res.redirect("/"))
+        })
+      } catch (err) {
+        return next(err)
+      }
+    }
+];
+exports.user_login_get = function (req, res, next) {
+    res.render("log-in")
+}
+exports.user_login_post = passport.authenticate("local", 
+  { successRedirect: '/',
+  failureRedirect: '/log-in',
+  failureFlash: true })
+
+exports.user_logout_get = function (req, res, next) {
+  req.logout(function (err) {
+    if(err) {
+      next(err)
+    }
+    res.redirect("/")
+  })
+}
