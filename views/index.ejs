@@ -9,7 +9,7 @@
 
     <% if (locals.currentUser) {%>
       <header>
-        <a href="/"><h1>MembersOnly</h1></a>
+        <a href="/"><h1><span class="membersText">Members</span>Only</h1></a>
         <nav>
           <a href="/secret-code"><button>Join Secret Club</button></a>
           <a href="/create-message"><button>New Message</button></a>
@@ -43,13 +43,13 @@
       <ul class="messageGrid">
         <% for(let i=0; i<messages.length; i++) {%>
            <li class="messageCard">
-              <div><%= messages[i].title %></div>
-              <div><%= messages[i].text %></div>
+              <div class="title"><%= messages[i].title %></div>
+              <div class="text"><%= messages[i].text %></div>
               <% if (locals.currentUser) {%>
                 <% if (locals.currentUser.membership_status === true) {%>
                   <div class="info">
-                    <span><%= messages[i].username %></span>
-                    <span><%= messages[i].date %></span>
+                    <span>By: <span class="userName"><%= messages[i].username %></span></span>
+                    <span>On: <%= messages[i].date %></span>
                   </div>
                 <%} else {%>
                   <div class="info">

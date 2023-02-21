@@ -1,37 +1,117 @@
+html {height: 100%;}
 body {
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
   position: relative;
-  min-height: 100vh;
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+
 }
 header {
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 10px;
+  border-bottom: 1px solid lightgray;
 } 
+header > a {
+  color: #374151;
+  text-decoration-color: #10b981;
+}
+header > a .membersText {
+  color: #10b981;
+  text-decoration: underline;
+  text-decoration-color: white ;
+}
 header nav {
   display: flex;
   gap: 20px;
+}
+header nav button {
+  padding: 10px;
+  border: 1px solid #10b981;
+  color: white;
+  font-size: 16px;
+  font-weight: 600;
+  background-color: #10b981;
+  border-radius: 10px;
+}
+header nav button:hover, header nav button.active {
+  cursor: pointer;
+  background-color: white;
+  color: #10b981;
 }
 .userModal {
   display: none;
   position: absolute;
   border: 1px solid black;
+  top: 100px;
   right: 10px;
-  padding: 10px;
   flex-direction: column;
   gap: 10px;
-
-
+}
+.userModal > span {
+  padding: 10px;
 }
 .userModal > a, .userModal > div {
   border-top: 1px solid black;
+  padding: 10px;
 }
 .userModal > a {
   padding: 10px;
   display: flex;
   align-items: center;
   justify-content: center;
+}
+main {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding-left: auto;
+  padding-right: auto;
+  align-items: center;
+}
+main h2 {
+  font-size: 32px;
+  font-weight: 700;
+}
+.messageGrid {
+  list-style: none;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 15px;
+  max-width: 1200px;
+}
+li.messageCard {
+  display: flex;
+  flex-direction: column;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px; 
+  border-radius: 10px;
+}
+li.messageCard > * {
+  padding: 10px;
+}
+li.messageCard > .title {
+  font-size: 22px;
+  font-weight: 700;
+  max-width: 800px;
+  color: #111827
+}
+li.messageCard > .text {
+  max-width: 1000px;
+  overflow: auto;
+}
+li.messageCard > .info {
+  display: flex;
+  justify-content: space-between;
+}
+li.messageCard > .info .userName {
+  color: #10b981;
+}
+@media (max-width: 1200px) {
+  li.messageCard > .title, li.messageCard > .text {
+    max-width: 500px;
+  }
 }
 
 
