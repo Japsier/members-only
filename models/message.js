@@ -11,7 +11,7 @@ const MessageSchema = new Schema({
     username: {type: String, required: true}
 });
 MessageSchema.virtual("date").get(function () {
-    return DateTime.fromJSDate(this.timestamp).toISODate()
+    return DateTime.fromJSDate(this.timestamp).toLocaleString(DateTime.DATETIME_MED)
 })
 
 module.exports = mongoose.model("Message", MessageSchema);

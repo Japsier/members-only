@@ -130,6 +130,7 @@ li.messageCard {
   flex-direction: column;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px; 
   border-radius: 10px;
+  min-width: 300px;
 }
 li.messageCard > * {
   padding: 10px;
@@ -144,9 +145,13 @@ li.messageCard > .text {
   max-width: 1000px;
   overflow: auto;
 }
+
 li.messageCard > .info {
   display: flex;
   justify-content: space-between;
+}
+li.messageCard > .info.italic {
+  font-style: italic;
 }
 li.messageCard > .info .userName {
   color: #10b981;
