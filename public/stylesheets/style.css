@@ -44,25 +44,67 @@ header nav button:hover, header nav button.active {
 .userModal {
   display: none;
   position: absolute;
-  border: 1px solid black;
+  border: 1px solid #10b981;
+  border-radius: 10px;
   top: 100px;
   right: 10px;
   flex-direction: column;
   gap: 10px;
+  background-color: white;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
 }
-.userModal > span {
+.userModal > div {
   padding: 10px;
+  border-bottom: 1px solid #10b981;
 }
-.userModal > a, .userModal > div {
-  border-top: 1px solid black;
-  padding: 10px;
+.userModal > .userDiv {
+  display: flex;
+  flex-direction: column;
+  min-width: 220px;
 }
-.userModal > a {
+.userModal > .userDiv > .username {
+  padding-top: 8px;
+  align-self: center;
+  justify-self: center;
+  color: #10b981;
+  font-size: 16px;
+  font-weight: 700;
+
+}
+.userModal > .membershipStatus {
+  display: flex;
+  flex-direction: column;
+}
+.userModal > .membershipStatus > .memberUser {
+  padding-top: 8px;
+  align-self: center;
+  justify-self: center;
+  color: #10b981;
+  font-size: 16px;
+  font-weight: 700;
+}
+.userModal > div.logOut {
   padding: 10px;
   display: flex;
   align-items: center;
   justify-content: center;
 }
+.userModal button {
+  border: 1px solid #10b981;
+  border-radius: 10px;
+  background-color: white;
+  color: black;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 8px;
+}
+.userModal button:hover {
+  cursor: pointer;
+  background-color: #10b981;
+  color: white;
+}
+
+
 main {
   display: flex;
   flex-direction: column;

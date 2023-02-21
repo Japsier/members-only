@@ -11,27 +11,34 @@
       <header>
         <a href="/"><h1><span class="membersText">Members</span>Only</h1></a>
         <nav>
-          <a href="/secret-code"><button>Join Secret Club</button></a>
+          <% if(locals.currentUser.membership_status !== true) {%>
+            <a href="/secret-code"><button>Join Secret Club</button></a>
+          <%} %>
           <a href="/create-message"><button>New Message</button></a>
           <button class="userBtn"><%= locals.currentUser.username %></button>
         </nav>
       </header>
       <div class="userModal">
-        <span><%= locals.currentUser.first_name + " " + locals.currentUser.last_name %></span>
+        <div class="userDiv">
+          <span>Welcome back:</span>
+          <span class="username"><%= locals.currentUser.first_name + " " + locals.currentUser.last_name %></span>
+        </div>
         <div class="membershipStatus">
           <span>Membership Status: </span>
           <% if (locals.currentUser.membership_status === true) {%>
-            <span>You're a Member!</span>  
+            <span class="memberUser">You're a Member!</span>  
           <%} else {%>
-            <span>not a member</span>
+            <span class="memberUser">not a member (yet)</span>
           <%} %>
         </div>
-        <a href="/log-out"><button>Log out</button></a>
+        <div class="logOut">
+          <a href="/log-out"><button>Log out</button></a>
+        </div>
       </div>
 
     <% } else { %>
       <header>
-        <a href="/"><h1>MembersOnly</h1></a>
+        <a href="/"><h1><span class="membersText">Members</span>Only</h1></a>
         <nav>
           <a href="/log-in"><button>Log In</button></a>
           <a href="/sign-up"><button>Sign Up</button></a>
