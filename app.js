@@ -9,6 +9,7 @@ const passport = require("passport");
 const LocalStrategy = require("passport-local").Strategy;
 const User = require("./models/user")
 const bcrypt = require("bcryptjs");
+const flash = require("connect-flash")
 
 
 
@@ -42,7 +43,7 @@ passport.use(
         return done(err);
       }
       if (!user) {
-        return done(null, false, { message: "Incorrect username" });
+        return done(null, false, { message: "Incorrect username"});
       }
       bcrypt.compare(password, user.password, (err, res) => {
         if(err) return done(err)
@@ -66,6 +67,7 @@ passport.deserializeUser(function(id, done) {
 app.use(session({ secret: "cats", resave: false, saveUninitialized: true }));
 app.use(passport.initialize());
 app.use(passport.session());
+app.use(flash())
 app.use(express.urlencoded({ extended: false }));
 
 app.use(function(req, res, next) {

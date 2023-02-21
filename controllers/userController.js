@@ -61,12 +61,12 @@ exports.user_create_post = [
     }
 ];
 exports.user_login_get = function (req, res, next) {
-    res.render("log-in", {error: "none"})
+  res.render("log-in")
 }
 exports.user_login_post = passport.authenticate("local", { 
       successRedirect: '/',
       failureRedirect: '/log-in',
-      //failureFlash: true 
+      failureFlash: true 
   })
 
 

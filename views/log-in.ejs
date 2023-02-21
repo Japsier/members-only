@@ -47,17 +47,20 @@
           </nav>
         </header>
       <%}%>
-    <h1>Log In</h1>
     <%if (locals.currentUser) {%>
+        <h1>Log In</h1>
         <h3>Already logged in! What are you doing here??</h3>
     <%} else {%>
-        <form action="" method="POST">
-            <label for="username">Username</label>
-            <input type="text" name="username" id="username">
-            <label for="password">Password</label>
-            <input type="password" name="password" id="password">
-            <button>Log In</button>
-        </form>       
+        <div class="logIn">
+            <h1>Login</h1>
+            <form action="" method="POST">
+                <label for="username">Username</label>
+                <input type="text" name="username" id="username">
+                <label for="password">Password</label>
+                <input type="password" name="password" id="password">
+                <button>Log In</button>
+            </form>   
+        </div>    
     <%} %>
 
 
@@ -65,14 +68,17 @@
         const userBtn = document.querySelector(".userBtn")
         const userModal = document.querySelector(".userModal")
         const body = document.querySelector("body")
-        body.addEventListener("click", (e) => {
-          if (e.target === userBtn) {
-          userModal.style.display = "flex"
-          userBtn.classList.add("active")
-        } else {
-          userModal.style.display = "none"
-          userBtn.classList.remove("active")
-        }})
+        if(userBtn !== null) {
+            body.addEventListener("click", (e) => {
+            if (e.target === userBtn) {
+            userModal.style.display = "flex"
+            userBtn.classList.add("active")
+            } else {
+            userModal.style.display = "none"
+            userBtn.classList.remove("active")
+            }})
+        }
+
     </script>
 
     

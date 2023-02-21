@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel='stylesheet' href='/stylesheets/style.css' />
+    <link rel='stylesheet' href='/stylesheets/create-message.css' />
     <title></title>
 </head>
 <body>
@@ -46,8 +47,9 @@
           </nav>
         </header>
       <%}%>
-    <h1>Create message</h1>
     <% if (locals.currentUser) {%>
+      <div class="createMsg">
+        <h1>Create Message</h1>
         <form action="" method="POST">
             <label for="title">Title</label>
             <input type="text" name="title" id="title">
@@ -55,8 +57,10 @@
             <textarea name="text" id="text" cols="30" rows="10"></textarea>
             <button>Submit</button>
         </form>
+      </div>
     <%} else {%>
-        <h3>Log In or Create an account to post a message</h3>    
+      <h1>Create Message</h1>
+      <h3>Log In or Create an account to post a message</h3>    
     <%} %>
 
     <script>
@@ -71,6 +75,6 @@
           userModal.style.display = "none"
           userBtn.classList.remove("active")
         }})
-      </script>
+    </script>
 </body>
 </html>
