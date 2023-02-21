@@ -9,7 +9,7 @@
 
     <% if (locals.currentUser) {%>
       <header>
-        <h1>MembersOnly</h1>
+        <a href="/"><h1>MembersOnly</h1></a>
         <nav>
           <a href="/secret-code"><button>Join Secret Club</button></a>
           <a href="/create-message"><button>New Message</button></a>
@@ -31,7 +31,7 @@
 
     <% } else { %>
       <header>
-        <h1>MembersOnly</h1>
+        <a href="/"><h1>MembersOnly</h1></a>
         <nav>
           <a href="/log-in"><button>Log In</button></a>
           <a href="/sign-up"><button>Sign Up</button></a>
@@ -51,8 +51,16 @@
                     <span><%= messages[i].username %></span>
                     <span><%= messages[i].date %></span>
                   </div>
+                <%} else {%>
+                  <div class="info">
+                    <span>Become a member to see the date & author</span>
+                  </div>
                 <%} %>
-              <%} %>
+              <%} else {%>
+                <div class="info">
+                  <span>Log in & become a member to see the date & author</span>
+                </div>
+                <%} %>
            </li>
         <% } %>
         </ul>

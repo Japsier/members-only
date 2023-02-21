@@ -4,16 +4,65 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel='stylesheet' href='/stylesheets/style.css' />
     <title></title>
 </head>
 <body>
+    <% if (locals.currentUser) {%>
+        <header>
+          <a href="/"><h1>MembersOnly</h1></a>
+          <nav>
+            <a href="/secret-code"><button>Join Secret Club</button></a>
+            <a href="/create-message"><button>New Message</button></a>
+            <button class="userBtn"><%= locals.currentUser.username %></button>
+          </nav>
+        </header>
+        <div class="userModal">
+          <span><%= locals.currentUser.first_name + " " + locals.currentUser.last_name %></span>
+          <div class="membershipStatus">
+            <span>Membership Status: </span>
+            <% if (locals.currentUser.membership_status === true) {%>
+              <span>You're a Member!</span>  
+            <%} else {%>
+              <span>not a member</span>
+            <%} %>
+          </div>
+          <a href="/log-out"><button>Log out</button></a>
+        </div>
+  
+      <% } else { %>
+        <header>
+          <a href="/"><h1>MembersOnly</h1></a>
+          <nav>
+            <a href="/log-in"><button>Log In</button></a>
+            <a href="/sign-up"><button>Sign Up</button></a>
+          </nav>
+        </header>
+      <%}%>
     <h1>Create message</h1>
-    <form action="" method="POST">
-        <label for="title">Title</label>
-        <input type="text" name="title" id="title">
-        <label for="text">Text</label>
-        <textarea name="text" id="text" cols="30" rows="10"></textarea>
-        <button>Submit</button>
-    </form>
+    <% if (locals.currentUser) {%>
+        <form action="" method="POST">
+            <label for="title">Title</label>
+            <input type="text" name="title" id="title">
+            <label for="text">Text</label>
+            <textarea name="text" id="text" cols="30" rows="10"></textarea>
+            <button>Submit</button>
+        </form>
+    <%} else {%>
+        <h3>Log In or Create an account to post a message</h3>    
+    <%} %>
+
+    <script>
+        const userBtn = document.querySelector(".userBtn")
+        const userModal = document.querySelector(".userModal")
+        const body = document.querySelector("body")
+        body.addEventListener("click", (e) => {
+          if (e.target === userBtn) {
+            userModal.style.display = "flex"
+          } else {
+            userModal.style.display = "none"
+          }})
+  
+      </script>
 </body>
 </html>
