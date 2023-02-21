@@ -20,12 +20,10 @@ exports.create_message_post = [
     // Validate and sanitize fields.
     body("title", "Title must not be empty.")
       .trim()
-      .isLength({ min: 1 })
-      .escape(),
+      .isLength({ min: 1 }),
     body("text", "text must not be empty.")
       .trim()
-      .isLength({ min: 1 })
-      .escape(),
+      .isLength({ min: 1 }),
     // Process request after validation and sanitization.
     (req, res, next) => {
       // Extract the validation errors from a request.

@@ -88,6 +88,7 @@ header nav button:hover, header nav button.active {
   display: flex;
   align-items: center;
   justify-content: center;
+  border-bottom: 0;
 }
 .userModal button {
   border: 1px solid #10b981;

@@ -22,7 +22,7 @@
         <div class="userModal">
           <div class="userDiv">
             <span>Welcome back:</span>
-            <span class="username"><%= locals.currentUser.first_name + " " + locals.currentUser.last_name %></span>
+            <span class="username"><%= locals.currentUser.username %></span>
           </div>
           <div class="membershipStatus">
             <span>Membership Status: </span>
@@ -65,11 +65,12 @@
         const body = document.querySelector("body")
         body.addEventListener("click", (e) => {
           if (e.target === userBtn) {
-            userModal.style.display = "flex"
-          } else {
-            userModal.style.display = "none"
-          }})
-  
+          userModal.style.display = "flex"
+          userBtn.classList.add("active")
+        } else {
+          userModal.style.display = "none"
+          userBtn.classList.remove("active")
+        }})
       </script>
 </body>
 </html>

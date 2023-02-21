@@ -15,20 +15,6 @@ exports.user_create_get = function (req, res, next) {
 }
 exports.user_create_post = [
     // Validate and sanitize fields.
-    body("firstname")
-      .trim()
-      .isLength({ min: 1 })
-      .escape()
-      .withMessage("First name must be specified.")
-      .isAlphanumeric()
-      .withMessage("First name has non-alphanumeric characters."),
-    body("lastname")
-      .trim()
-      .isLength({ min: 1 })
-      .escape()
-      .withMessage("Last name must be specified.")
-      .isAlphanumeric()
-      .withMessage("Last name has non-alphanumeric characters."),
     body("username")
         .trim()
         .isLength({ min: 1 })
@@ -48,7 +34,7 @@ exports.user_create_post = [
       if (!errors.isEmpty()) {
         // There are errors. Render form again with sanitized values/errors messages.
         res.render("sign-up", {
-          user: user,
+          username: req.body.username,
           errors: errors.array(),
         });
         return;
@@ -64,8 +50,6 @@ exports.user_create_post = [
         bcrypt.hash(req.body.password, 10, (err, hashedPassword) => {
           if(err) return next(err)
           const user = new User({
-            first_name: req.body.firstname,
-            last_name: req.body.lastname,
             username: req.body.username,
             password: hashedPassword,
             membership_status: false,
