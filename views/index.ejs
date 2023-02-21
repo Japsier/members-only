@@ -40,7 +40,22 @@
     <%}%>
     <main>
       <h2>Messages</h2>
-      <div class="messageGrid"></div>
+      <ul class="messageGrid">
+        <% for(let i=0; i<messages.length; i++) {%>
+           <li class="messageCard">
+              <div><%= messages[i].title %></div>
+              <div><%= messages[i].text %></div>
+              <% if (locals.currentUser) {%>
+                <% if (locals.currentUser.membership_status === true) {%>
+                  <div class="info">
+                    <span><%= messages[i].username %></span>
+                    <span><%= messages[i].date %></span>
+                  </div>
+                <%} %>
+              <%} %>
+           </li>
+        <% } %>
+        </ul>
     </main>
 
     <script>

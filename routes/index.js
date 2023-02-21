@@ -5,7 +5,7 @@ const user_controller = require("../controllers/userController")
 const message_controller = require("../controllers/messageController")
 
 /* GET home page. */
-router.get('/', user_controller.index);
+router.get('/', message_controller.index);
 
 router.get('/sign-up', user_controller.user_create_get);
 router.post('/sign-up', user_controller.user_create_post);

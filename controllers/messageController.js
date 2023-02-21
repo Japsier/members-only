@@ -1,6 +1,16 @@
 const Message = require("../models/message")
 
 const { body, validationResult } = require("express-validator")
+exports.index = function (req, res, next) {
+    Message.find({})
+        .exec(function (err, message_list) {
+            if(err) {
+                return next(err)
+            } else {
+                res.render("index", { messages: message_list })
+            }
+        })
+}
 
 exports.create_message_get = function (req, res, next) {
     res.render("create-message")
