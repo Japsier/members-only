@@ -6,9 +6,10 @@
     <link rel='stylesheet' href='/stylesheets/style.css' />
   </head>
   <body>
-    <% if (user) {%>
+    <% if (locals.currentUser) {%>
       <h1>WELCOME BACK <%= user.username %></h1>
       <a href="/log-out">LOG OUT</a>
+      <a href="/secret-code">Become A Member!</a>
     <% } else { %>
       <h1>please log in</h1>
       <a href="/log-in">Log in</a>

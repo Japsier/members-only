@@ -15,4 +15,7 @@ router.post("/log-in", user_controller.user_login_post)
 
 router.get("/log-out", user_controller.user_logout_get)
 
+router.get("/secret-code", user_controller.secret_code_get)
+router.post("/secret-code", user_controller.secret_code_post)
+
 module.exports = router;

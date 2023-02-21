@@ -68,6 +68,11 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(express.urlencoded({ extended: false }));
 
+app.use(function(req, res, next) {
+  res.locals.currentUser = req.user;
+  next();
+});
+
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 
@@ -91,9 +96,6 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
-app.use(function(req, res, next) {
-  res.locals.currentUser = req.user;
-  next();
-});
+
 
 module.exports = app;

@@ -4,6 +4,7 @@ const { body, validationResult } = require("express-validator");
 const bcrypt = require("bcryptjs")
 
 const passport = require("passport");
+const { locals } = require("../app");
 
 
 exports.index = function (req, res, next) {
@@ -76,12 +77,16 @@ exports.user_create_post = [
     }
 ];
 exports.user_login_get = function (req, res, next) {
-    res.render("log-in")
+    res.render("log-in", {error: "none"})
 }
-exports.user_login_post = passport.authenticate("local", 
-  { successRedirect: '/',
-  failureRedirect: '/log-in',
-  failureFlash: true })
+exports.user_login_post = passport.authenticate("local", { 
+      successRedirect: '/',
+      failureRedirect: '/log-in',
+      failureFlash: true 
+  })
+
+
+
 
 exports.user_logout_get = function (req, res, next) {
   req.logout(function (err) {
@@ -90,4 +95,20 @@ exports.user_logout_get = function (req, res, next) {
     }
     res.redirect("/")
   })
+}
+
+exports.secret_code_get = function (req, res, next) {
+  res.render("secret-code", {error: false})
+}
+exports.secret_code_post = async function (req, res, next) {
+  if (req.body.secretcode === process.env.MembershipCode) {
+    const docs = await User.findByIdAndUpdate(
+      req.user._id, 
+      {membership_status: true}, )
+    console.log(docs.membership_status)
+    res.redirect("/")
+
+  } else {
+    res.render("secret-code", {error: true})
+  }
 }
