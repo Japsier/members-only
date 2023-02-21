@@ -18,4 +18,7 @@ router.get("/log-out", user_controller.user_logout_get)
 router.get("/secret-code", user_controller.secret_code_get)
 router.post("/secret-code", user_controller.secret_code_post)
 
+router.get("/create-message", message_controller.create_message_get)
+router.post("/create-message", message_controller.create_message_post)
+
 module.exports = router;

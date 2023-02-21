@@ -1,8 +1,37 @@
 body {
-  padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  position: relative;
+  min-height: 100vh;
+}
+header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px;
+} 
+header nav {
+  display: flex;
+  gap: 20px;
+}
+.userModal {
+  display: none;
+  position: absolute;
+  border: 1px solid black;
+  right: 10px;
+  padding: 10px;
+  flex-direction: column;
+  gap: 10px;
+
+
+}
+.userModal > a, .userModal > div {
+  border-top: 1px solid black;
+}
+.userModal > a {
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-a {
-  color: #00B7FF;
-}
+
