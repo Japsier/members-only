@@ -18,7 +18,7 @@ exports.user_create_post = [
     body("username")
         .trim()
         .isLength({ min: 1 })
-        .escape()
+        .isLength({ max: 30 })
         .withMessage("Username must be specified."),
     body("password")
         .isLength({ min: 1 }),
